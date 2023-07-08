@@ -13,6 +13,9 @@ public class EnemyLogic : MonoBehaviour
     private EnemyFollow followBehavior;
 
     [SerializeField]
+    private RunAway fleeBehavior;
+
+    [SerializeField]
     private Switch switchButton;
     [SerializeField]
     private GameplayManager gameplayManager;
@@ -43,6 +46,7 @@ public class EnemyLogic : MonoBehaviour
     {
         bat.SetActive(hasBat);
         followBehavior.enabled = hasBat;
+        fleeBehavior.enabled = !hasBat;
     }
 
     private void SwitchActivated()
