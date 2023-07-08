@@ -14,6 +14,8 @@ public class PlayerLogic : MonoBehaviour
     private int life = 3;
     private CharacterController controller = null;
     
+    public delegate void OnHealthChange(int currentHealth);
+    public event OnHealthChange onHealthChange;
     private void OnDisable()
     {
         gameplayManager.switchTimeUpEvent -= SwitchTimeUp;
@@ -60,6 +62,8 @@ public class PlayerLogic : MonoBehaviour
             hasBat = true;
             var switchBtn = other.gameObject.GetComponent<Switch>();
             switchBtn.DisableSwitch();
+            life--;
+            onHealthChange?.Invoke(life);
         }
     }
 }
