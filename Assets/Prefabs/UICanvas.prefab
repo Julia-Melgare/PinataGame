@@ -287,6 +287,11 @@ MonoBehaviour:
   - {fileID: 4095598434940419261}
   - {fileID: 4095598435776921668}
   - {fileID: 4095598434149756320}
+  enemy: {fileID: 0}
+  enemyLives:
+  - {fileID: 4095598435909713512}
+  - {fileID: 4095598434643074019}
+  - {fileID: 4095598434588217588}
 --- !u!1 &4095598434588217584
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,7 +318,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4095598434588217584}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

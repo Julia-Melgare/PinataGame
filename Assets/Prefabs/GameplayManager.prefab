@@ -46,8 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBatTime: 10
   switchRespawnTime: 15
+  minLollipopSpawnTime: 30
+  maxLollipopSpawnTime: 60
   switchButton: {fileID: 0}
+  lollipopPrefab: {fileID: 909490745108811264, guid: 6a052bd5f979845488cf1a187086209b,
+    type: 3}
   maxXPos: 7.22
   minXPos: -8.85
   maxZPos: 5.5
   minZPos: -10.41
+  player: {fileID: 0}
+  enemy: {fileID: 0}

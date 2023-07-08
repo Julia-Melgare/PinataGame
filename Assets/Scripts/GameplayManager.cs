@@ -9,7 +9,13 @@ public class GameplayManager : MonoBehaviour
     [SerializeField]
     private float switchRespawnTime = 15f;
     [SerializeField]
+    private float minLollipopSpawnTime = 30f;
+    [SerializeField]
+    private float maxLollipopSpawnTime = 60f;
+    [SerializeField]
     private Switch switchButton;
+    [SerializeField]
+    private GameObject lollipopPrefab;
 
     [SerializeField]
     private float maxXPos = 7.22f;
@@ -19,6 +25,11 @@ public class GameplayManager : MonoBehaviour
     private float maxZPos = 5.5f;
     [SerializeField]
     private float minZPos = -10.41f;
+
+    [SerializeField]
+    private PlayerLogic player;
+    [SerializeField]
+    private EnemyLogic enemy;
     private Vector3 initialSwitchPos;
 
     public delegate void SwitchTimeUp();
@@ -26,18 +37,23 @@ public class GameplayManager : MonoBehaviour
     private void OnDisable()
     {
         switchButton.switchActivatedEvent -= SwitchActivated;
+        player.onHealthChange -= CheckLoss;
+        enemy.onHealthChange -= CheckWin;
     }
 
     private void OnEnable()
     {
         switchButton.switchActivatedEvent += SwitchActivated;
+        player.onHealthChange += CheckLoss;
+        enemy.onHealthChange += CheckWin;
+
     }
     void Start()
     {
         initialSwitchPos = switchButton.transform.position;
+        StartLollipopSpawn();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -59,6 +75,28 @@ public class GameplayManager : MonoBehaviour
         switchButton.gameObject.SetActive(true);
     }
 
+    private void StartLollipopSpawn()
+    {
+        float lollipopSpawnTime = Random.Range(minLollipopSpawnTime, maxLollipopSpawnTime);
+        StartCoroutine(SpawnLollipop(lollipopSpawnTime));
+    }
+
+    private void CheckLoss(int currentPlayerHealth)
+    {
+        if (currentPlayerHealth <= 0)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
+    private void CheckWin(int currentEnemyHealth)
+    {
+        if (currentEnemyHealth <= 0)
+        {
+            Time.timeScale = 0;
+        }
+    }
+
     IEnumerator SwitchRespawn()
     {
         yield return new WaitForSeconds(switchRespawnTime);
@@ -68,5 +106,15 @@ public class GameplayManager : MonoBehaviour
     {
         yield return new WaitForSeconds(playerBatTime);
         switchTimeUpEvent?.Invoke();
+    }
+    IEnumerator SpawnLollipop(float spawnTime)
+    {
+        yield return new WaitForSeconds(spawnTime);
+        float xPos = Random.Range(minXPos, maxXPos);
+        float zPos = Random.Range(minZPos, maxZPos);
+        var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        var lollipop = GameObject.Instantiate(lollipopPrefab);
+        lollipop.transform.position = newPos;
+        StartLollipopSpawn();
     }
 }

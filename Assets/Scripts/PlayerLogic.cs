@@ -65,5 +65,12 @@ public class PlayerLogic : MonoBehaviour
             life--;
             onHealthChange?.Invoke(life);
         }
+
+        if(other.tag == "Lollipop")
+        {
+            life++;
+            onHealthChange?.Invoke(life);
+            Destroy(other.gameObject);
+        }
     }
 }
