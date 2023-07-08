@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerLogic : MonoBehaviour
 {
     [SerializeField]
+    private GameplayManager gameplayManager;
+    [SerializeField]
     private float playerSpeed = 5.0f;
     [SerializeField]
     private GameObject bat;
@@ -12,6 +14,16 @@ public class PlayerLogic : MonoBehaviour
     private int life = 3;
     private CharacterController controller = null;
     
+    private void OnDisable()
+    {
+        gameplayManager.switchTimeUpEvent -= SwitchTimeUp;
+    }
+
+    private void OnEnable()
+    {
+        gameplayManager.switchTimeUpEvent += SwitchTimeUp;
+    }
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -33,11 +45,21 @@ public class PlayerLogic : MonoBehaviour
         }
     }
 
+    private void SwitchTimeUp()
+    {
+        if(hasBat)
+        {
+            hasBat = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Switch")
         {
             hasBat = true;
+            var switchBtn = other.gameObject.GetComponent<Switch>();
+            switchBtn.DisableSwitch();
         }
     }
 }
