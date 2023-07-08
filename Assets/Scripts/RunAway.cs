@@ -15,8 +15,8 @@ public class RunAway : MonoBehaviour
     [SerializeField]
     private float displacementDist;
 
-    UnityEngine.AI.NavMeshHit hit;
-    float distanceToEdge = 3;
+    /*UnityEngine.AI.NavMeshHit hit;
+    float distanceToEdge = 3;*/
 
     //public List< NavMeshAnalytics.EdgeHit > m_edge_hits = null;
 
@@ -63,6 +63,10 @@ public class RunAway : MonoBehaviour
         {
             Debug.Log("Corner");
         }*/
+    }
+
+    void OnEnable() {
+        agent.stoppingDistance = 0;
     }
 
     /*private void MoveToPos(Vector3 pos) {

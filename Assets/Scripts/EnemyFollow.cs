@@ -20,4 +20,8 @@ public class EnemyFollow : MonoBehaviour
     {
         enemy.SetDestination(Player.position);
     }
+
+    void OnEnable() {
+        enemy.stoppingDistance = 1;
+    }
 }
