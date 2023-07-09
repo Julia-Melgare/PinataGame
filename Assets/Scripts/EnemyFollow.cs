@@ -23,5 +23,6 @@ public class EnemyFollow : MonoBehaviour
 
     void OnEnable() {
         enemy.stoppingDistance = 1;
+        enemy.speed = 5.4f;
     }
 }

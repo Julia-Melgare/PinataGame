@@ -67,6 +67,7 @@ public class RunAway : MonoBehaviour
 
     void OnEnable() {
         agent.stoppingDistance = 0;
+        agent.speed = 6;
     }
 
     /*private void MoveToPos(Vector3 pos) {
