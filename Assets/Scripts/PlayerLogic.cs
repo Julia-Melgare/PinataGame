@@ -16,6 +16,13 @@ public class PlayerLogic : MonoBehaviour
     
     public delegate void OnHealthChange(int currentHealth);
     public event OnHealthChange onHealthChange;
+
+    public delegate void OnHealthLoss();
+    public event OnHealthLoss onHealthLoss;
+
+    public delegate void OnHealthGain();
+    public event OnHealthGain onHealthGain;
+
     private void OnDisable()
     {
         gameplayManager.switchTimeUpEvent -= SwitchTimeUp;
@@ -63,12 +70,14 @@ public class PlayerLogic : MonoBehaviour
             var switchBtn = other.gameObject.GetComponent<Switch>();
             switchBtn.DisableSwitch();
             life--;
+            onHealthLoss?.Invoke();
             onHealthChange?.Invoke(life);
         }
 
         if(other.tag == "Lollipop")
         {
             life++;
+            onHealthGain?.Invoke();
             onHealthChange?.Invoke(life);
             Destroy(other.gameObject);
         }

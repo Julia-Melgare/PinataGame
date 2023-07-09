@@ -23,6 +23,9 @@ public class EnemyLogic : MonoBehaviour
     public delegate void OnHealthChange(int currentHealth);
     public event OnHealthChange onHealthChange;
 
+    public delegate void OnHealthLoss();
+    public event OnHealthLoss onHealthLoss;
+
     private void OnDisable()
     {
         switchButton.switchActivatedEvent -= SwitchActivated;
@@ -53,6 +56,7 @@ public class EnemyLogic : MonoBehaviour
     {
         hasBat = false;
         life--;
+        onHealthLoss?.Invoke();
         onHealthChange?.Invoke(life);
     }
 

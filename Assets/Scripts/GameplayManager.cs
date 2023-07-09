@@ -32,21 +32,49 @@ public class GameplayManager : MonoBehaviour
     private EnemyLogic enemy;
     private Vector3 initialSwitchPos;
 
+    [SerializeField]
+    private GameObject corre;
+    [SerializeField]
+    private GameObject pega;
+    [SerializeField]
+    private GameObject goblinSounds;
+    
+    [SerializeField]
+    private AudioSource oofPinata;
+    [SerializeField]
+    private AudioSource oofGoblin;
+    [SerializeField]
+    private AudioSource healing;
+    [SerializeField]
+    private AudioSource pinataDeath;
+    [SerializeField]
+    private AudioSource goblinDeath;
+    [SerializeField]
+    private AudioSource victory;
+    [SerializeField]
+    private AudioSource defeat;
+    
+
     public delegate void SwitchTimeUp();
     public event SwitchTimeUp switchTimeUpEvent;
     private void OnDisable()
     {
         switchButton.switchActivatedEvent -= SwitchActivated;
         player.onHealthChange -= CheckLoss;
+        player.onHealthLoss -= PlayOofPinata;
+        player.onHealthGain -= PlayHealing;
         enemy.onHealthChange -= CheckWin;
+        enemy.onHealthLoss -= PlayOofGoblin;
     }
 
     private void OnEnable()
     {
         switchButton.switchActivatedEvent += SwitchActivated;
         player.onHealthChange += CheckLoss;
+        player.onHealthLoss += PlayOofPinata;
+        player.onHealthGain += PlayHealing;
         enemy.onHealthChange += CheckWin;
-
+        enemy.onHealthLoss += PlayOofGoblin;
     }
     void Start()
     {
@@ -62,6 +90,9 @@ public class GameplayManager : MonoBehaviour
     private void SwitchActivated()
     {
         Debug.Log("switch activated!");
+        corre.SetActive(false);
+        pega.SetActive(true);
+        goblinSounds.SetActive(false);
         StartCoroutine(SwitchCountdown());
         StartCoroutine(SwitchRespawn());
     }
@@ -91,14 +122,37 @@ public class GameplayManager : MonoBehaviour
     {
         if (currentPlayerHealth <= 0)
         {
+            pega.SetActive(false);
+            corre.SetActive(false);
+            pinataDeath.Play();
+            defeat.Play();
             Time.timeScale = 0;
         }
     }
+
+    private void PlayOofPinata()
+    {
+        oofPinata.Play();
+    }    
+
+    private void PlayOofGoblin()
+    {
+        oofGoblin.Play();
+    } 
+
+    private void PlayHealing()
+    {
+        healing.Play();
+    } 
 
     private void CheckWin(int currentEnemyHealth)
     {
         if (currentEnemyHealth <= 0)
         {
+            pega.SetActive(false);
+            corre.SetActive(false);
+            goblinDeath.Play();
+            victory.Play();
             Time.timeScale = 0;
         }
     }
@@ -111,6 +165,9 @@ public class GameplayManager : MonoBehaviour
     IEnumerator SwitchCountdown()
     {
         yield return new WaitForSeconds(playerBatTime);
+        pega.SetActive(false);
+        corre.SetActive(true);
+        goblinSounds.SetActive(true);
         switchTimeUpEvent?.Invoke();
     }
     IEnumerator SpawnLollipop(float spawnTime)
