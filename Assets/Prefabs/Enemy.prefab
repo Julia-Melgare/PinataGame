@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bat: {fileID: 5113563205402099538}
+  isAttacking: 0
   goblinAttackCooldown: 2
   animator: {fileID: 1674945648092020680}
   followBehavior: {fileID: 5824970203288550486}
@@ -133,8 +134,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.7274458, y: 2.596143, z: 3.692329}
-  m_Center: {x: -0.13542783, y: 0.7980715, z: 0.1791503}
+  m_Size: {x: 4.105158, y: 2.596143, z: 3.1779566}
+  m_Center: {x: 0.39987198, y: 0.7980715, z: -0.633884}
 --- !u!1001 &7037304912762641997
 PrefabInstance:
   m_ObjectHideFlags: 0

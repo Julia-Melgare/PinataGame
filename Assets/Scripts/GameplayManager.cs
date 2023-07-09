@@ -103,13 +103,13 @@ public class GameplayManager : MonoBehaviour
         float xPos = Random.Range(minXPos, maxXPos);
         float zPos = Random.Range(minZPos, maxZPos);
         var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
-        Debug.Log(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")));
-        while(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")))
+        Debug.Log(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")));
+        while(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")))
         {
             xPos = Random.Range(minXPos, maxXPos);
             zPos = Random.Range(minZPos, maxZPos);
             newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
-            Debug.Log(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")));
+            Debug.Log(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")));
         }
         switchButton.gameObject.transform.position = newPos;
         switchButton.gameObject.SetActive(true);
@@ -127,6 +127,7 @@ public class GameplayManager : MonoBehaviour
         {
             pega.SetActive(false);
             corre.SetActive(false);
+            goblinSounds.SetActive(false);
             pinataDeath.Play();
             defeat.Play();
             Time.timeScale = 0;
@@ -154,6 +155,7 @@ public class GameplayManager : MonoBehaviour
         {
             pega.SetActive(false);
             corre.SetActive(false);
+            goblinSounds.SetActive(false);
             goblinDeath.Play();
             victory.Play();
             Time.timeScale = 0;
@@ -179,11 +181,13 @@ public class GameplayManager : MonoBehaviour
         float xPos = Random.Range(minXPos, maxXPos);
         float zPos = Random.Range(minZPos, maxZPos);
         var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
-        while(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")))
+        Debug.Log(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")));
+        while(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")))
         {
             xPos = Random.Range(minXPos, maxXPos);
             zPos = Random.Range(minZPos, maxZPos);
             newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+            Debug.Log(Physics.CheckSphere(newPos, 15.0f, LayerMask.NameToLayer("Obstacle")));
         }
         var lollipop = GameObject.Instantiate(lollipopPrefab);
         lollipop.transform.position = newPos;

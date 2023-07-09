@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b931283eaf49e6a4886b2700c43bc4c7
+guid: 6f66114311636014fb763eef266657e3
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Balao
-    second: {fileID: 2100000, guid: 00d10f382ba23ce4ea31e47d2b3833bc, type: 2}
+      name: Pirulito
+    second: {fileID: 2100000, guid: bc23450a01d458548b2f848775e3903d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

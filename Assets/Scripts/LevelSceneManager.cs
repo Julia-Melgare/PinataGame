@@ -13,25 +13,37 @@ public class LevelSceneManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        levelID = PlayerPrefs.GetInt("Level", 1);
+    }
+
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.R)) LoadScene(levelID);
     }
 
     public void NextLevel()
     {
         levelID++;
         PlayerPrefs.SetInt("Level", levelID);
-        if (levelID >= 3)
+        PlayerPrefs.Save();
+        if (levelID >= 4)
         {
             SceneManager.LoadScene(0);
         }
         else
         {
+            Debug.Log(levelID);
             SceneManager.LoadScene(levelID);
         }        
     }
 
+    public void LoadScene(int ID)
+    {
+        SceneManager.LoadScene(ID);
+        levelID = ID;
+    }
+
     public void RetryLevel()
     {
-        SceneManager.LoadScene(levelID);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("Level", levelID));
     }
 }
