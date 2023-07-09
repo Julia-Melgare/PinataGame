@@ -78,6 +78,7 @@ public class GameplayManager : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1f;
         initialSwitchPos = switchButton.transform.position;
         StartLollipopSpawn();
     }
