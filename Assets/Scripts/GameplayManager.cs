@@ -71,6 +71,12 @@ public class GameplayManager : MonoBehaviour
         float xPos = Random.Range(minXPos, maxXPos);
         float zPos = Random.Range(minZPos, maxZPos);
         var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        while(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")))
+        {
+            xPos = Random.Range(minXPos, maxXPos);
+            zPos = Random.Range(minZPos, maxZPos);
+            newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        }
         switchButton.gameObject.transform.position = newPos;
         switchButton.gameObject.SetActive(true);
     }
@@ -113,6 +119,12 @@ public class GameplayManager : MonoBehaviour
         float xPos = Random.Range(minXPos, maxXPos);
         float zPos = Random.Range(minZPos, maxZPos);
         var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        while(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")))
+        {
+            xPos = Random.Range(minXPos, maxXPos);
+            zPos = Random.Range(minZPos, maxZPos);
+            newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        }
         var lollipop = GameObject.Instantiate(lollipopPrefab);
         lollipop.transform.position = newPos;
         StartLollipopSpawn();
