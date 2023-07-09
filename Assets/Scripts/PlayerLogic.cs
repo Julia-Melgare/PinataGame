@@ -16,6 +16,9 @@ public class PlayerLogic : MonoBehaviour
     private int life = 3;
     private CharacterController controller = null;
     
+    [SerializeField]
+    private float playerInvCooldown = 3f;
+    private float invTimer = 0f;
     public delegate void OnHealthChange(int currentHealth);
     public event OnHealthChange onHealthChange;
 
@@ -25,6 +28,7 @@ public class PlayerLogic : MonoBehaviour
     public delegate void OnHealthGain();
     public event OnHealthGain onHealthGain;
 
+    
     private void OnDisable()
     {
         gameplayManager.switchTimeUpEvent -= SwitchTimeUp;
@@ -48,6 +52,17 @@ public class PlayerLogic : MonoBehaviour
         {
             Attack();   
         }
+        if(invTimer > 0) invTimer -= Time.deltaTime;
+    }
+
+    private void GetHit()
+    {
+        life--;
+        /*if (life <= 0)
+        {
+            animator.PlayDeathAnim();
+        }*/
+        onHealthChange?.Invoke(life);
     }
 
     private void Move()
@@ -105,11 +120,24 @@ public class PlayerLogic : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Enemy" && hasBat && animator.IsAttacking)
+        if(other.tag == "Enemy")
         {
-            Debug.Log("hit goblin");
-            other.gameObject.GetComponent<EnemyLogic>().Hit();
-            hasBat = false;
+            var enemy = other.gameObject.GetComponent<EnemyLogic>();
+            if (hasBat && animator.IsAttacking)
+            {
+                Debug.Log("hit goblin");
+                enemy.Hit();
+                hasBat = false;
+            }
+            else
+            {
+                if (enemy.isAttacking && invTimer <= 0)
+                {
+                    GetHit();
+                    invTimer = playerInvCooldown;
+                }
+            }
+            
         }
     }
 }

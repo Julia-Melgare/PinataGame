@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3723256415059342739}
   - component: {fileID: 4098409075509702435}
   - component: {fileID: 3723256415059342736}
+  - component: {fileID: 5163071661218567218}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -68,6 +69,19 @@ MonoBehaviour:
   gameplayManager: {fileID: 0}
   playerSpeed: 5
   bat: {fileID: 2022502052445393907}
+--- !u!65 &5163071661218567218
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4098409075509702441}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4461603, y: 2.6405158, z: 3.2456508}
+  m_Center: {x: -0.18584329, y: 0.8202579, z: 0.36135912}
 --- !u!1001 &7296219622200231302
 PrefabInstance:
   m_ObjectHideFlags: 0

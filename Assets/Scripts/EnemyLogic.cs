@@ -7,8 +7,12 @@ public class EnemyLogic : MonoBehaviour
     [SerializeField]
     private GameObject bat;
     private bool hasBat = true;
+    public bool isAttacking = false;
     private int life = 3;
 
+    [SerializeField]
+    private float goblinAttackCooldown = 2f;
+    
     [SerializeField]
     private EnemyAnimController animator;
 
@@ -29,6 +33,7 @@ public class EnemyLogic : MonoBehaviour
 
     public delegate void OnHealthLoss();
     public event OnHealthLoss onHealthLoss;
+    private float attackTimer = 0f;
 
     private void OnDisable()
     {
@@ -57,9 +62,10 @@ public class EnemyLogic : MonoBehaviour
 
         if (!animator.IsAttacking)
         {
-            if (followBehavior.enabled && Vector3.Distance(followBehavior.Player.transform.position, transform.position) <= 1.0f)
+            if (attackTimer <= 0f && followBehavior.enabled && Vector3.Distance(followBehavior.Player.transform.position, transform.position) <= 1.0f)
             {
                 Attack();
+                attackTimer = goblinAttackCooldown;
                 return;
             }
             
@@ -75,6 +81,8 @@ public class EnemyLogic : MonoBehaviour
             
         }
         previousPos = transform.position;
+        attackTimer -= Time.deltaTime;
+        isAttacking = animator.IsAttacking || attackTimer <= 0;
     }
 
     public void Hit()
@@ -92,7 +100,6 @@ public class EnemyLogic : MonoBehaviour
     private void Attack()
     {
         if (animator.IsAttacking || !hasBat) return;
-        Debug.Log("attack");
         animator.PlayAttackAnim();
     }
 

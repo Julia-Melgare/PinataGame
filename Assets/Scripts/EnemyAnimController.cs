@@ -35,7 +35,6 @@ public class EnemyAnimController : MonoBehaviour
 
     public void AttackAnimEnd()
     {
-        Debug.Log("goblin attack anim end");
         isAttacking = false;
     }
 

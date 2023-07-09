@@ -26,6 +26,6 @@ public class TitleScreenUIManager : MonoBehaviour
     public void PlayButton()
     {
         pop.Play();
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene(1);
     }
 }

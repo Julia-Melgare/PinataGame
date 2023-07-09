@@ -103,11 +103,13 @@ public class GameplayManager : MonoBehaviour
         float xPos = Random.Range(minXPos, maxXPos);
         float zPos = Random.Range(minZPos, maxZPos);
         var newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+        Debug.Log(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")));
         while(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")))
         {
             xPos = Random.Range(minXPos, maxXPos);
             zPos = Random.Range(minZPos, maxZPos);
             newPos = new Vector3(xPos, initialSwitchPos.y, zPos);
+            Debug.Log(Physics.CheckSphere(newPos, 5.0f, LayerMask.NameToLayer("Obstacle")));
         }
         switchButton.gameObject.transform.position = newPos;
         switchButton.gameObject.SetActive(true);

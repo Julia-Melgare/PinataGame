@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bat: {fileID: 5113563205402099538}
+  goblinAttackCooldown: 2
   animator: {fileID: 1674945648092020680}
   followBehavior: {fileID: 5824970203288550486}
   fleeBehavior: {fileID: 4637688703068243356}

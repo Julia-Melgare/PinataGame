@@ -8,12 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScreen.unity
     guid: d29b2cfcba3903b47b66db67b159b2c5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gameplay.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Gameplay 1.unity
     guid: a017216be0e808e40a3caf1216206a78
+  - enabled: 1
+    path: Assets/Scenes/Fase1.unity
+    guid: 3e66ddabbec4f144d837d2fe2eeed4fa
+  - enabled: 1
+    path: Assets/Scenes/Fase2.unity
+    guid: 519000be95f38104db7731c50b73f858
+  - enabled: 1
+    path: Assets/Scenes/Fase3.unity
+    guid: f04961ce9d4515c42aafc1154348b3b9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8913ea35865d92a458341d9dbbb03dd1,
       type: 2}
